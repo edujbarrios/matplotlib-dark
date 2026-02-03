@@ -30,19 +30,6 @@ cd matplotlib-dark
 pip install -e .
 ```
 
-Or download and install locally:
-
-```bash
-# Clone the repository
-git clone https://github.com/edujbarrios/matplotlib-dark.git
-
-# Navigate to the directory
-cd matplotlib-dark
-
-# Install in development mode
-pip install -e .
-```
-
 ## Usage
 
 ### Basic Usage
@@ -94,3 +81,4 @@ MIT License
 ## Author
 
 Eduardo J. Barrios ([@edujbarrios](https://github.com/edujbarrios))
+
