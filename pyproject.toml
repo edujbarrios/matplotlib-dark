@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "matplotlib-dark"
+version = "0.1.0"
+description = "matplotlib, but in dark mode"
+readme = "README.md"
+authors = [
+    {name = "Eduardo J. Barrios", email = "eduardojbarriosgarcia@gmail.com"}
+]
+license = {text = "MIT"}
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Visualization",
+]
+keywords = ["matplotlib", "dark-mode", "visualization", "plotting", "theme"]
+dependencies = [
+    "matplotlib>=3.5.0",
+]
+requires-python = ">=3.8"
+
+[project.urls]
+Homepage = "https://github.com/edujbarrios/matplotlib-dark"
+Repository = "https://github.com/edujbarrios/matplotlib-dark"
+Issues = "https://github.com/edujbarrios/matplotlib-dark/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+matplotlib_dark = ["py.typed"]
