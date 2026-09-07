@@ -5,7 +5,7 @@
 **Automatic dark mode for Matplotlib — polished charts without designing a theme.**
 
 [![CI](https://github.com/edujbarrios/matplotlib-dark/actions/workflows/ci.yml/badge.svg)](https://github.com/edujbarrios/matplotlib-dark/actions/workflows/ci.yml)
-[![PyPI](https://img.shields.io/pypi/v/matplotlib-dark)](https://pypi.org/project/matplotlib-dark/)
+[![PyPI version](https://img.shields.io/pypi/v/matplotlib-dark.svg?logo=pypi&logoColor=white&cacheSeconds=300)](https://pypi.org/project/matplotlib-dark/)
 [![Python](https://img.shields.io/pypi/pyversions/matplotlib-dark)](https://pypi.org/project/matplotlib-dark/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
