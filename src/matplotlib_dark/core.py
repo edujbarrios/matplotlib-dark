@@ -1,14 +1,18 @@
-"""Core functionality for matplotlib-dark"""
+"""Core functionality for matplotlib-dark."""
 
-import matplotlib.pyplot as plt
+from contextlib import contextmanager
+from typing import Iterator, List, Optional
+
+import matplotlib as mpl
 from matplotlib import cycler
+
 from .themes import THEMES
 
 # Store original rcParams
-_original_params = None
+_original_params: Optional[dict] = None
 
 
-def dark_mode(theme='default'):
+def dark_mode(theme: str = "default") -> None:
     """
     Apply a dark theme to matplotlib plots.
     
@@ -28,7 +32,7 @@ def dark_mode(theme='default'):
     set_theme(theme)
 
 
-def light_mode():
+def light_mode() -> None:
     """
     Restore matplotlib to its default light theme.
     
@@ -42,13 +46,13 @@ def light_mode():
     global _original_params
     
     if _original_params is None:
-        plt.rcdefaults()
+        mpl.rcdefaults()
     else:
-        plt.rcParams.update(_original_params)
+        mpl.rcParams.update(_original_params)
         _original_params = None
 
 
-def set_theme(theme_name):
+def set_theme(theme_name: str) -> None:
     """
     Set a specific dark theme.
     
@@ -73,12 +77,12 @@ def set_theme(theme_name):
     
     # Save original params on first call
     if _original_params is None:
-        _original_params = plt.rcParams.copy()
+        _original_params = dict(mpl.rcParams)
     
     theme = THEMES[theme_name]
     
     # Apply theme colors
-    plt.rcParams.update({
+    mpl.rcParams.update({
         'figure.facecolor': theme['bg_color'],
         'axes.facecolor': theme['axes_bg'],
         'axes.edgecolor': theme['text_color'],
@@ -100,10 +104,10 @@ def set_theme(theme_name):
         '#8FBCBB', '#88C0D0', '#81A1C1', '#5E81AC',
         '#BF616A', '#D08770', '#EBCB8B', '#A3BE8C', '#B48EAD'
     ])
-    plt.rcParams['axes.prop_cycle'] = cycler(color=colors)
+    mpl.rcParams['axes.prop_cycle'] = cycler(color=colors)
 
 
-def get_available_themes():
+def get_available_themes() -> List[str]:
     """
     Get a list of available theme names.
     
@@ -120,3 +124,25 @@ def get_available_themes():
     ['default', 'nord', 'monokai', 'dracula']
     """
     return list(THEMES.keys())
+
+
+@contextmanager
+def dark_theme(theme: str = "default") -> Iterator[None]:
+    """Temporarily apply a dark theme and restore the current style afterwards.
+
+    This is safe to nest and is useful when only one plot should use the theme.
+
+    Examples
+    --------
+    >>> import matplotlib_dark as mdk
+    >>> with mdk.dark_theme("nord"):
+    ...     pass  # Create and save a plot here.
+    """
+    global _original_params
+    previous_original = _original_params
+    with mpl.rc_context():
+        set_theme(theme)
+        try:
+            yield
+        finally:
+            _original_params = previous_original
